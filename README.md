@@ -166,7 +166,7 @@ AWS VPC를 생성하면 각 가용 영역에 하나 이상의 서브넷(Subnet)�
 - 관계형 데이터베이스 관리 시스템(RDBMS) 요구사항에 맞게 Amazon RDS를 사용하도록 앞에서 생성한 웹 서버를 구성합니다.
 - 본 실습은 AWS 관리형 데이터베이스 인스턴스를 활용하여 관계형 데이터베이스 요구 사항을 해결하는 개념을 강화하도록 설계되었습니다.
 
-![image](/images/Day1-Description-RDS.png)
+![image](/img/2.png)
 
 `[Amazon Relational Database Service(RDS)]`를 사용하면 클라우드에서 관계형 데이터베이스를 더욱 간편하게 설정, 관리 및 확장할 수 있습니다. 시간 소모적인 데이터베이스 관리 작업을 관리하는 한편, 효율적인 비용으로 크기 조정이 가능한 용량을 제공하므로 고객은 애플리케이션과 비즈니스에 좀 더 집중할 수 있습니다. Amazon RDS를 사용하면 6개의 익숙한 데이터베이스 엔진 Amazon Aurora, Oracle, Microsoft SQL Server, PostgresSQL, MySQL 및 MariaDB 중에서 원하는 것을 선택할 수 있습니다.
 
