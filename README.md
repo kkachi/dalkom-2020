@@ -179,7 +179,6 @@ Amazon RDS 다중 AZ 배포는 데이터베이스(DB) 인스턴스의 가용성 
 - 고가용성을 갖춘 Amazon RDS DB 인스턴스를 시작합니다.
 - 웹 서버로부터의 연결을 허용하도록 DB 인스턴스를 구성합니다.
 - 웹 애플리케이션을 열고 데이터베이스와 상호 작용합니다.
-- 보안 그룹(Security Group)을 생성
 - AWS VPC에서 EC2 인스턴스 시작
 
 <br>
@@ -196,7 +195,7 @@ Amazon RDS 다중 AZ 배포는 데이터베이스(DB) 인스턴스의 가용성 
 
 <br>
 
-### Task 2.1 : 웹 서버 인스턴스 시작
+### Task 2.1 : 웹 서버 인스턴스 생성 및 
 본 작업에서는 VPC에서 EC2 인스턴스를 시작하는 과정을 확인합니다. 이 인스턴스는 웹 서버의 역할을 합니다.
 - 2.1.1 `[서비스]` 메뉴에서 `[EC2]`를 클릭
 - 2.1.2 화면 좌측 중앙에 `[인스턴스 시작]`을 클릭
@@ -205,116 +204,43 @@ Amazon RDS 다중 AZ 배포는 데이터베이스(DB) 인스턴스의 가용성 
     - `[다음 : 인스턴스 세부 정보 구성]`을 클릭
 - 2.1.5 `[Step3 : 인스턴스 구성]` 페이지에서 다음 정보를 입력, 나머지 값은 모두 기본값 적용
     - `[네트워크]` : **testVPC**
-    - `[서브넷]` : **testVPC-public-subnet-2a**
+    - `[서브넷]` : **testVPC-public-subnet-2c**
     - `[퍼블릭 IP 자동 할당]` : **활성화**로 변경
     - `[종료 방식]` : **종료**로 변경
 - 2.1.6 제일 하단으로 스크롤하여 `[고급 세부 정보]` 섹션을 확장
 - 2.1.7 명령 참조 파일에서 다음 사용자 데이터를 복사하여 `[사용자 데이터]` 상자에 붙여 넣고, `[텍스트로]`가 선택되었는지 확인
 
 ```sql
-#!/bin/bash -ex
+#!/bin/bash 
 yum -y update
 yum -y install httpd php mysql php-mysql
+service httpd start
 chkconfig httpd on
-/etc/init.d/httpd start
-if [ ! -f /var/www/html/lab2-app.tar.gz ]; then
-cd /var/www/html
-wget https://us-west-2-aws-staging.s3.amazonaws.com/awsu-ilt/AWS-100-ESS/v4.0/lab-2-configure-website-datastore/scripts/lab2-app.tar.gz
-tar xvfz lab2-app.tar.gz
-chown apache:root /var/www/html/lab2-app/rds.conf.php
-fi
 ```
 - 2.1.8 `[다음: 스토리지 추가]`를 클릭
 - 2.1.9 `[다음: 태그 추가]`를 클릭
 - 2.1.10 `[Step 5 : 태그추가]` 페이지에서 다음 정보를 입력
     - `[태그 추가]` 클릭
     - `[키]` : **Name**
-    - `[값]` : **Web Server 1**
+    - `[값]` : **WebServer**
 - 2.1.11 `[다음: 보안 그룹 구성]`을 클릭
 - 2.1.12 `[Step 6 : 보안 그룹 구성]` 페이지에서 **기존 보안 그룹 선택**을 클릭
-    - 작업 1.3에서 생성한 보안 그룹을 선택 (**WebSecurityGroup**)
+    - 이전에 생성한 보안 그룹을 선택 (**Web**)
 - 2.1.13 `[검토 및 시작]`을 클릭
 - 2.1.14 인스턴스 정보를 확인한 후 `[시작하기]`를 클릭
-- 2.1.15 `[Choose an existing key pair]`를 클릭
-    - **AWSLABS** 키 페어를 클릭하고, 아래 승인 확인란 체크
+- 2.1.15 `[새 키 페어 생성]`을 클릭
+    - 키 페어 이름은 **AWSLABS** 라고 지정 후, 키 페어 다운로드
     - `[인스턴스 시작]`을 클릭
-- 2.1.16 아래로 스크롤하여 `[인스턴스 보기]`를 클릭
-- 2.1.17 2개의 인스턴스(**Web Server1**과 VPC 마법사에서 시작한 **NAT 인스턴스**) 확인
-    - t2.nano 타입의 EC2 인스턴스 선택 후 `[Name]` 탭 연필 표시 클릭 후  **NAT Instance**로 변경
-- 2.1.18 `[Web Server 1]`의 `[Status Checks]` 열에 **2/2 검사 통과**가 표시될 때까지 대기
-    - 3~5분 정도 소요. 오른쪽 위에 있는 새로 고침 아이콘을 사용하여 업데이트를 확인
-- 2.1.19 `[Web Server 1]`을 선택하고 **퍼블릭 DNS(IPv4)** 값을 복사
-    - 다음과 같은 주소(예시) : **ec2-54-180-82-138.ap-northeast-2.compute.amazonaws.com**
-- 2.1.20 새 웹 브라우저 창이나 탭에 **퍼블릭 DNS(IPv4)** 값을 붙여 넣고 `[Enter]` 클릭
-    -  아래와 같은 `[Amazon Linux AMI Test Page]`를 확인
-
-
-![image](/images/Day1-Create-EC2.png)
+- 2.1.16 생성이 완료되면 해당 인스턴스(**WebServer**)를 클릭하고 **퍼블릭 DNS(IPv4)** 값을 복사
+- 2.1.17 새 웹 브라우저 창이나 탭에 **퍼블릭 DNS(IPv4)** 값을 붙여 넣고 `[Enter]` 클릭
 
 <br>
 
-### Task 1 : Amazon RDS DB 인스턴스 시작
+### Task 3 : Amazon RDS DB 인스턴스 시작
 
 - 개요
     - 이 작업에서는 MySQL이 지원되는 Amazon RDS DB 인스턴스를 시작합니다.
-
-- 시나리오
-
-다음 인프라에서 시작합니다.
-
-![image](/images/Day1-Task-WEB.png)
-
-다음 인프라를 구축합니다.
-
-![image](/images/Day1-Task-RDS.png)
-
-<br>
-
-### Task 1.1 : RDS DB 인스턴스에 대한 VPC 보안 그룹 생성
-이 작업에서는 웹 서버가 RDS DB 인스턴스에 액세스하도록 허용하는 VPC 보안 그룹을 생성합니다.
-- 1.1.1 `[AWS Management Console의 서비스]` 메뉴에서 `[VPC]`를 클릭
-- 1.1.2 VPC 탐색 창에서 `[보안]`탭에 속한 `[보안 그룹]`을 클릭
-- 1.1.3 `[보안 그룹 생성]`을 클릭
-- 1.1.4 `[보안 그룹 생성]` 대화 상자에서 다음 세부 정보를 입력
-    - `[보안 그룹 이름]` : **DBSecurityGroup**
-    - `[설명]` : **DB Instance Security Group**
-    - `[VPC]` : **My LAB VPC** 클릭
-- 1.1.5 `[보안 그룹 생성]`을 클릭 후 `[닫기]`
-- 1.1.6 VPC 탐색 창에서 `[보안]`탭에 속한 `[보안 그룹]`을 클릭
-- 1.1.7 방금 생성한 `[DBSecurityGroup]`을 선택
-- 1.1.8	아래 `[인바운드 규칙]` 탭을 선택하고 `[규칙 추가]`을 클릭
-- 1.1.9	다음 세부 정보로 인바운드 규칙을 생성
-    - `[규칙 추가]` 클릭
-    - `[유형]` : 스크롤을 내려 **MySQUAurora** 선택
-    - `[소스]` : 입력 창에 **sg** 입력 후  **WebSecurityGroup** 항목을 클릭
-- 1.1.10	`[규칙 저장]` 클릭 후 `[닫기]`
-
-<br>
-
-### Task 1.2 : Amazon RDS 인스턴스용 프라이빗 서브넷 생성
-이 작업에서는 Amazon RDS 인스턴스용 프라이빗 서브넷을 2개 생성합니다.
-- 1.2.1	VPC 탐색 창에서 `[서브넷]`을 클릭
-- 1.2.2	`[서브넷 생성]`을 클릭
-- 1.2.3	`[서브넷 생성]` 대화 상자에서 다음 세부 정보를 입력
-    - `[이름 태그]` : **Private_Subnet5**
-    - `[VPC]` : **My Lab VPC** 선택
-    - `[가용 영역]` : 앞에서 **Public_Subnet1**용으로 적어둔 **ap-northeast-2a**를 클릭
-    - `[CIDR block]` : **10.0.5.0/24**
-- 1.2.4	`[생성]`후 `[닫기]`클릭
-- 1.2.5	`[서브넷 생성]`을 클릭
-- 1.2.6	`[서브넷 생성]` 대화 상자에서 다음 세부 정보를 입력
-    - `[이름 태그]` : **Private_Subnet6**
-    - `[VPC]` : **My Lab VPC** 선택
-    - `[가용 영역]` : 앞에서 **Public_Subnet2**용으로 적어둔 **ap-northeast-2c**를 클릭
-    - `[CIDR block]` : **10.0.6.0/24**
-- 1.2.7	`[생성]`후 `[닫기]`클릭
-- 1.2.8 `[Private_Subnet5]`를 선택하고, 모든 다른 서브넷이 선택 해제되었는지 확인
-    - 아래쪽 창에 있는 `[라우팅 테이블]`을 클릭
-    - `[대상]` **0.0.0.0/0**의 `[대상]`이 접두사 **eni**가 포함되어 있는지 확인 
-    - 포함되어 있지 않은경우, `[라우팅 테이블 연결 편집]`를 클릭하고 `[라우팅 테이블 ID*]` 목록에 있는 다른 라우팅 테이블을 클릭
-    - `[대상]` **0.0.0.0/0**의 `[대상]`이 접두사 **eni**를 포함되어 있다면 `[저장]`을 클릭
-- 1.2.9 `[Private_Subnet6]`에서 앞에서 수행한 단계를 반복
-
+    
 <br>
 
 ### Task 1.3 : DB 서브넷 그룹 생성 
