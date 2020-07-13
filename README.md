@@ -18,7 +18,7 @@
 - AWS EC2 인스턴스에 대한 보안 그룹을 생성합니다.
 - 웹 서버를 실행하고 이를 VPC에서 시작하도록 EC2 인스턴스를 구성 및 사용자 정의합니다.
 
-![image](/images/Day1-Description-VPC.png)
+![image](/img/1.png)
 
 `[Amazon Virtual Private Cloud(VPC)]`는 Amazon Web 서비스(AWS) 리소스를 고객이 정의한 가상 네트워크에서 실행할 수 있는 서비스입니다. 이 가상 네트워크는 고객의 자체 데이터 센터에서 운영하는 기존 네트워크와 매우 유사하며 AWS의 확장 가능한 인프라를 사용한다는 이점이 있습니다. 
 
