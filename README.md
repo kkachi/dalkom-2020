@@ -258,7 +258,31 @@ chkconfig httpd on
 - 1.2.13 `[검토 및 시작]`을 클릭
 - 1.2.14 인스턴스 정보를 확인한 후 `[시작하기]`를 클릭
 - 1.2.15 `[기존 키 페어 선택]`(**AWSLABS**)을 클릭하고, 아래 승인 확인 후 `[인스턴스 시작]`을 클릭
-- 채워넣어야함 접속
+- 1.2.16 윈도우는 Putty를 통해 접속을 합니다.(https://www.putty.org/)
+- 1.2.17 먼저 Puttygen을 실행 시켜 `Conversions` -> `import` -> `pem파일 선택` -> `save private key` 과정을 진행하여 .ppk 파일을 저장합니다.
+![image](/img/4.png) 
+
+<br>
+
+- 1.2.18 변경한 .ppk 파일을 가지고 `SSH` -> `Auth` 항목에 저장합니다.
+![image](/img/5.png)
+
+<br>
+
+- 1.2.19 Bastion 서버의 public IP와 Port 22를 입력하고 `Open`을 클릭합니다.
+![image](/img/6.png)
+
+<br>
+
+- 1.2.20 초기 계정명인 `ec2-user`를 입력하여 접속합니다.
+![image](/img/7.png)
+
+<br>
+
+- 1.2.21 mac은 ssh 명령어를 통해서 접속을 합니다.
+```sql
+sudo ssh -i "AWSLABS.pem" ec2-user@(public IP)
+```
 
 <br>
 
@@ -330,7 +354,7 @@ chkconfig httpd on
 - 3.1.3 아래의 명령어를 참고하여 MySQL 클라이언트를 설치하고 데이터베이스에 접속을 합니다.
 
 ```sql
-sudo yum install mysql                         # MySQL 클라이언트 설치
+sudo yum install mysql           # MySQL 클라이언트 설치
 mysql -uadmin -h [엔드포인트] -p    # MySQL 접속 명령어
 ```
 
