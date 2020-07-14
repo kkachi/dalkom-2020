@@ -260,7 +260,6 @@ chkconfig httpd on
 - 1.2.15 `[기존 키 페어 선택]`(**AWSLABS**)을 클릭하고, 아래 승인 확인 후 `[인스턴스 시작]`을 클릭
 - 채워넣어야함 접속
 
-
 <br>
 
 ### Task 2 : Amazon RDS DB 인스턴스 시작
@@ -306,7 +305,7 @@ chkconfig httpd on
     - `[추가 연결 구성]` 확장
     - `[서브넷 그룹]` : **RDS**
     - `[퍼블릭 액세스 가능]` : **아니요** 클릭
-    - `[VPC 보안 그룹]` : **DBSecurityGroup (VPC)** 클릭 추가, default 보안 그룹 **X** 클릭 삭제
+    - `[VPC 보안 그룹]` : **RDS** 클릭 추가, default 보안 그룹 **X** 클릭 삭제
 - 2.2.8	`[추가 구성]`에서 다음 정보를 입력하고 나머지 값은 모두 기본값 적용
     - `[초기 데이터베이스 이름]` : **sampledb** 입력
     - `[자동 백업 활성화]` : **Check** 해제
@@ -326,22 +325,13 @@ chkconfig httpd on
 
 ### Task 3.1 : 데이터베이스에 액세스
 웹 서버에서 실행되는 웹 애플리케이션을 확인합니다.
-- 채워넣어야함 접속
-
-- 3.1.11 윈도우 사용자는 Putty를 통해 접속을 합니다.
-
-- 3.1.11 mac 사용자는 아래 명령어를 통해 접속을 합니다.
-```sql
-ssh -i "bastion-host-key.pem" -N -L 33322:{target-private-ip}:22 ec2-user@{bastion-host-public-ip}                      # MySQL 클라이언트 설치
-ssh -i "target-key.pem" -p 33322 {target-user(대체로 ec2-user)}@localhost                                                 # MySQL 접속 명령어
-```
-
-- 3.1.11 연결&보안 아래에 있는 `[엔드포인트]`를 복사하여 접속 시, 주소를 입력합니다.
-- 3.1.4 아래의 명령어를 참고하여 MySQL 클라이언트를 설치하고 데이터베이스에 접속을 합니다.
+- 3.1.1 위에서 Bastion 서버에 접속한 것 같이, WebServer도 동일하게 접속을 합니다.
+- 3.1.2 생성한 데이터베이스를 클릭하여 연결&보안 아래에 있는 `[엔드포인트]`를 복사하여 접속 시, 주소를 입력합니다.
+- 3.1.3 아래의 명령어를 참고하여 MySQL 클라이언트를 설치하고 데이터베이스에 접속을 합니다.
 
 ```sql
 sudo yum install mysql                         # MySQL 클라이언트 설치
-mysql --host=[디비 엔드포인트] —user=admin -p      # MySQL 접속 명령어
+mysql -uadmin -h [엔드포인트] -p    # MySQL 접속 명령어
 ```
 
 <br>
