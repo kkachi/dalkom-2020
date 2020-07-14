@@ -265,21 +265,31 @@ chkconfig httpd on
 <br>
 
 - 1.2.18 변경한 .ppk 파일을 가지고 `SSH` -> `Auth` 항목에 저장합니다.
+
+<br>
+
 ![image](/img/5.png)
 
 <br>
 
 - 1.2.19 Bastion 서버의 public IP와 Port 22를 입력하고 `Open`을 클릭합니다.
+
+<br>
+
 ![image](/img/6.png)
 
 <br>
 
 - 1.2.20 초기 계정명인 `ec2-user`를 입력하여 접속합니다.
+
+<br>
+
 ![image](/img/7.png)
 
 <br>
 
 - 1.2.21 mac은 ssh 명령어를 통해서 접속을 합니다.
+
 ```sql
 sudo ssh -i "AWSLABS.pem" ec2-user@(public IP)
 ```
