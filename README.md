@@ -265,27 +265,30 @@ chkconfig httpd on
 
 - 윈도우는 Putty를 통해 접속을 합니다.(https://www.putty.org/)
 - 먼저 Puttygen을 실행 시켜 `Conversions` -> `import` -> `pem파일 선택` -> `save private key` 과정을 진행하여 .ppk 파일을 저장합니다.
-
 <br>
+
 ![image](/img/4.png) 
-<br>
 
+<br>
 - 변경한 .ppk 파일을 가지고 `SSH` -> `Auth` 항목에 저장합니다.
-
 <br>
+
 ![image](/img/5.png)
+
 <br>
 
 - Bastion 서버의 public IP와 Port 22를 입력하고 `Open`을 클릭합니다.
-
 <br>
+
 ![image](/img/6.png)
+
 <br>
 
 - 초기 계정명인 `ec2-user`를 입력하여 접속합니다.
-
 <br>
+
 ![image](/img/7.png)
+
 <br>
 
 ### Mac
