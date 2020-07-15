@@ -571,7 +571,10 @@ VPC 마법사로 생성된 EC2 Instance를 지워 봅시다
 ELB도 지워봅시다
 - `[AWS Management Console]` ▷ `[EC2]` ▷ `[로드 밸런서]` 클릭
     - **testELB**을 클릭하고 상단 [작업] ▷ `[삭제]` 클릭 ▷ `[예, 삭제]`
-
+- `[AWS Management Console]` ▷ `[EC2]` ▷ `[대상 그룹]` 클릭
+    - **testTarget**을 클릭하고 상단 [작업] ▷ `[삭제]` 클릭 ▷ `[예, 삭제]`
+    
+<br>
 
 수고하셨습니다.
 
