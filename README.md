@@ -533,7 +533,6 @@ mysql -uadmin -h [DB엔드포인트] -p    # MySQL 접속 명령어
 10분
 
 1. Delete Your Amazon RDS
-RDS부터 지워봅시다
 - `[AWS Management Console]` ▷ `[RDS]`
     - **testDB**을 클릭하고 상단 `[작업]` ▷ `[삭제]` 클릭
         - 최종 스냅샷 생성 여부 **Check** 해제
@@ -543,7 +542,6 @@ RDS부터 지워봅시다
 <br>
 
 2. Delete Your EC2 (AutoScaling Instance)
-AutoScaling으로 생성된 EC2를 지워봅시다
 - `[AWS Management Console]` ▷ `[EC2]` ▷ `[Auto Scaling]` 그룹 클릭
     - **testASgroup**을 클릭하고 상단 `[작업]` ▷ `[삭제]` 클릭
 
@@ -560,15 +558,13 @@ AutoScaling으로 생성된 EC2를 지워봅시다
 
 <br>
 
-3. Delete Your EC2 (NAT Instance)
-VPC 마법사로 생성된 EC2 Instance를 지워 봅시다
+3. Delete Your NAT Gateway
 - `[AWS Management Console]` ▷ `[VPC]` 클릭
     - **NAT Gateway**을 클릭하고 상단 `[작업]` ▷ `[NAT 게이트웨이 삭제]` 클릭
 
 <br>
 
 4. Delete Your ELB
-ELB도 지워봅시다
 - `[AWS Management Console]` ▷ `[EC2]` ▷ `[로드 밸런서]` 클릭
     - **testELB**을 클릭하고 상단 [작업] ▷ `[삭제]` 클릭 ▷ `[예, 삭제]`
 - `[AWS Management Console]` ▷ `[EC2]` ▷ `[대상 그룹]` 클릭
