@@ -530,8 +530,6 @@ mysql -uadmin -h [DB엔드포인트] -p    # MySQL 접속 명령어
 
 ## Terminate Resources
 
-10분
-
 1. Delete Your Amazon RDS
 - `[AWS Management Console]` ▷ `[RDS]`
     - **testDB**을 클릭하고 상단 `[작업]` ▷ `[삭제]` 클릭
