@@ -389,9 +389,6 @@ mysql -uadmin -h [DB엔드포인트] -p    # MySQL 접속 명령어
 - EC2 Auto Scaling 시작 구성 생성
 - EC2 Auto Scaling 그룹 생성
 
-- AWS CloudWatch 경보 생성
-- AWS 인프라의 성능을 모니터링
-
 ![image](/img/3.png)
 
 ### 3-3. 기간
@@ -537,9 +534,8 @@ mysql -uadmin -h [DB엔드포인트] -p    # MySQL 접속 명령어
 
 1. Delete Your Amazon RDS
 RDS부터 지워봅시다
-
 - `[AWS Management Console]` ▷ `[RDS]`
-    - **labdbinstance**을 클릭하고 상단 `[작업]` ▷ `[삭제]` 클릭
+    - **testDB**을 클릭하고 상단 `[작업]` ▷ `[삭제]` 클릭
         - 최종 스냅샷 생성 여부 **Check** 해제
         - 인스턴스 삭제 시 시스템 스냅샷 및 특정 시점으로 복구를 포함한 자동화된 백업을 더 이상 사용할 수 없다는 항목에 **Check**
         - 삭제를 확인하려면 아래 필드에 **delete me**라는 문구를 입력 후 `[삭제]` 클릭
@@ -549,27 +545,25 @@ RDS부터 지워봅시다
 2. Delete Your EC2 (AutoScaling Instance)
 AutoScaling으로 생성된 EC2를 지워봅시다
 - `[AWS Management Console]` ▷ `[EC2]` ▷ `[Auto Scaling]` 그룹 클릭
-    - **Lab3ASGroup**을 클릭하고 상단 `[작업]` ▷ `[삭제]` 클릭
+    - **testASgroup**을 클릭하고 상단 `[작업]` ▷ `[삭제]` 클릭
 
 - `[AWS Management Console]` ▷ `[EC2]` ▷ `[시작 구성]` 클릭
-    - **Lab3Config**을 클릭하고 상단 `[작업]` ▷ `[시작 구성 삭제]` 클릭
+    - **testConfig**을 클릭하고 상단 `[작업]` ▷ `[시작 구성 삭제]` 클릭
 
 - `[AWS Management Console]` ▷ `[EC2]` ▷ `[AMI]` 클릭
-    - **Web Server AMI**의 AMI ID를 기록 (예: ami-0ea06fc7ff2beb3ae)
-    - **Web Server AMI**를 클릭하고 상단 `[작업]` ▷ `[등록 취소]`▷ `[계속]` 클릭
+    - **WebServer AMI**의 AMI ID를 기록 (예: ami-0ea06fc7ff2beb3ae)
+    - **WebServer AMI**를 클릭하고 상단 `[작업]` ▷ `[등록 취소]`▷ `[계속]` 클릭
 
 - `[AWS Management Console]` ▷ `[EC2]` ▷ `[스냅샷]` 클릭
-    - **Web Server AMI**의 AMI ID로 검색
+    - **WebServer AMI**의 AMI ID로 검색
     - 검색된 스냅샷을 클릭하고 상단 `[작업]` ▷ `[삭제]` ▷ `[예, 삭제]`를 클릭
 
 <br>
 
 3. Delete Your EC2 (NAT Instance)
 VPC 마법사로 생성된 EC2 Instance를 지워 봅시다
-- `[AWS Management Console]` ▷ `[EC2]` 클릭
-    - **NAT Instance**을 클릭하고 상단 `[작업]` ▷ `[인스턴스 상태]` ▷ `[종료]` 클릭
-- `[AWS Management Console]` ▷ `[EC2]` ▷ `[탄력적 IP]`클릭
-    - **NAT Instance**가 사용했떤 탄력적 IP를 클릭하고 `[작업]` ▷ `[주소 릴리스]` ▷ `[릴리스]` 클릭
+- `[AWS Management Console]` ▷ `[VPC]` 클릭
+    - **NAT Gateway**을 클릭하고 상단 `[작업]` ▷ `[NAT 게이트웨이 삭제]` 클릭
 
 <br>
 
